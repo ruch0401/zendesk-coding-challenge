@@ -1,32 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <title>Zendesk Coding Challenge</title>
-</head>
-<body>
+  </head>
+  <body>
     <h2>Mobile Ticket Viewer</h2>
-    <div class="tags">
-        <div class="tag">
-            tag1
-        </div>
-        <br>
-        <div class="tag">
-            tag1
-        </div>
-        <br>
-        <div class="tag">
-            tag1
-        </div>
-        <br>
-    </div>
+    <div class="tickets-accordion-holder"></div>
 
-    <div class="ticket-container">
-    </div>
+    <button class="fetch-tickets">Get All Tickets</button>
+    <div class="ticket-preview"></div>
+    <div class="ticket-container"></div>
+
     <script src="client.js"></script>
-</body>
+  </body>
 </html>
