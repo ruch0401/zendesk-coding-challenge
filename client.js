@@ -3,6 +3,17 @@ $(document).ready(function () {
 
   var ticket_count;
 
+  $.ajax({
+    url: "http://localhost:3000/tickets",
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  }).done(function (data) {
+    ticket_details = data.tickets;
+    for (ticket of ticket_details) {
+      buildDiv(ticket);
+    }
+  });
+
   $(".count-tickets").on("click", function (e) {
     $.ajax({
       url: "http://localhost:3000/ticket/count",
@@ -11,29 +22,27 @@ $(document).ready(function () {
     }).done(function (data) {
       ticket_count = data.count.value;
       console.log("Number of tickets returned ", ticket_count);
-    });
-
-    if (ticket_count > 25) {
-      console.log("25 se greater hai kya?");
-      paginate();
-    }
-  });
-
-  $(".fetch-tickets").on("click", function (e) {
-    e.preventDefault();
-    localStorage.clear();
-    $.ajax({
-      url: "http://localhost:3000/tickets",
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    }).done(function (data) {
-      ticket_details = data.tickets;
-      for (ticket of ticket_details) {
-        console.log(ticket);
-        buildDiv(ticket);
+      if (ticket_count > 25) {
+        paginate();
       }
     });
   });
+
+  // $(".fetch-tickets").on("click", function (e) {
+  //   e.preventDefault();
+  //   localStorage.clear();
+  //   $.ajax({
+  //     url: "http://localhost:3000/tickets",
+  //     method: "GET",
+  //     headers: { "Content-Type": "application/json" },
+  //   }).done(function (data) {
+  //     ticket_details = data.tickets;
+  //     for (ticket of ticket_details) {
+  //       console.log(ticket);
+  //       buildDiv(ticket);
+  //     }
+  //   });
+  // });
 
   function buildDiv(ticket) {
     $(".ticket-list-wrapper").append(
