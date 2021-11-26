@@ -16,16 +16,6 @@
   padding: 2%;
 }
 
-.temp {
-  display: flex;
-  flex-direction: row;
-}
-
-.hori1 {
-  padding: 5px;
-  margin: 5px;
-}
-
 .accordion {
   background-color: #eee;
   color: #444;
@@ -62,4 +52,12 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
+}
+
+h2.intro {
+  text-align: center;
+}
+
+button {
+  align-items: center;
 }

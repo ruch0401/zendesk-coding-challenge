@@ -3,13 +3,20 @@ $(document).ready(function () {
 
   var ticket_count;
 
-  $.ajax({
-    url: "http://localhost:3000/ticket/count",
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  }).done(function (data) {
-    ticket_count = data.count.value;
-    console.log("Number of tickets returned ", ticket_count);
+  $(".count-tickets").on("click", function (e) {
+    $.ajax({
+      url: "http://localhost:3000/ticket/count",
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    }).done(function (data) {
+      ticket_count = data.count.value;
+      console.log("Number of tickets returned ", ticket_count);
+    });
+
+    if (ticket_count > 25) {
+      console.log("25 se greater hai kya?");
+      paginate();
+    }
   });
 
   $(".fetch-tickets").on("click", function (e) {
@@ -29,14 +36,19 @@ $(document).ready(function () {
   });
 
   function buildDiv(ticket) {
-    $(".tickets-accordion-holder").append(
+    $(".ticket-list-wrapper").append(
       `
+      <div class="ticket-list-item">
       <button class="accordion" id="${ticket.id}">${ticket.subject}</button>
-    <div class="panel">
-      <p>${ticket.description}</p>
-      <p>Created at: ${ticket.created_at}</p>
-      <p>Updated at: ${ticket.updated_at}</p>
-      <p>Tags: ${ticket.tags}</p>
+      <div class="panel">
+        <p>${ticket.description}</p>
+        <p>Created at: ${ticket.created_at}</p>
+        <p>Updated at: ${ticket.updated_at}</p>
+        <p>Tags: ${ticket.tags}</p>
+        <p>Status: ${ticket.status}</p>
+        <p>Priorty: ${ticket.priority}</p>
+        <p>Type: ${ticket.type}</p>
+      </div>
     </div>
       `
     );
@@ -53,6 +65,27 @@ $(document).ready(function () {
       } else {
         panel.style.maxHeight = panel.scrollHeight + "px";
       }
+    });
+  }
+
+  function paginate() {
+    var items = $(".ticket-list-wrapper .ticket-list-item");
+    console.log("Items ", items);
+    var numItems = items.length;
+    var perPage = 25;
+
+    items.slice(perPage).hide();
+
+    $("#pagination-container").pagination({
+      items: numItems,
+      itemsOnPage: perPage,
+      prevText: "&laquo;",
+      nextText: "&raquo;",
+      onPageClick: function (pageNumber) {
+        var showFrom = perPage * (pageNumber - 1);
+        var showTo = showFrom + perPage;
+        items.hide().slice(showFrom, showTo).show();
+      },
     });
   }
 });

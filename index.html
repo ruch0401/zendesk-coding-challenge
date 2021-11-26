@@ -5,16 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/jquery.simplePagination.min.js"
+      integrity="sha512-J4OD+6Nca5l8HwpKlxiZZ5iF79e9sgRGSf0GxLsL1W55HHdg48AEiKCXqvQCNtA1NOMOVrw15DXnVuPpBm2mPg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/simplePagination.css"
+      integrity="sha512-emkhkASXU1wKqnSDVZiYpSKjYEPP8RRG2lgIxDFVI4f/twjijBnDItdaRh7j+VRKFs4YzrAcV17JeFqX+3NVig=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>Zendesk Coding Challenge</title>
   </head>
   <body>
-    <h2>Mobile Ticket Viewer</h2>
-    <div class="tickets-accordion-holder"></div>
+    <h2 class="intro">Mobile Ticket Viewer</h2>
+    <div class="ticket-list-wrapper"></div>
 
     <button class="fetch-tickets">Get All Tickets</button>
-    <div class="ticket-preview"></div>
-    <div class="ticket-container"></div>
+    <button class="count-tickets">Count Tickets</button>
+    <div id="pagination-container"></div>
 
     <script src="client.js"></script>
   </body>
