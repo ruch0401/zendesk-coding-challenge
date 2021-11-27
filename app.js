@@ -4,13 +4,14 @@ require("dotenv").config();
 const cors = require("cors");
 const request = require("request-promise");
 
-// MIDDLEWARES
+// MIDDLEWARE
 app.use(
   cors({
     origin: "*",
   })
 );
 
+// ROUTE
 app.get("/tickets", async (req, res) => {
   const options = {
     method: "GET",

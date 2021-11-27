@@ -11,7 +11,7 @@ $(document).ready(function () {
     function (data) {
       ticket_details = data.tickets;
       for (ticket of ticket_details) {
-        buildDiv(ticket);
+        renderTicketDetails(ticket);
       }
       if (ticket_details.length > perPage) {
         paginate();
@@ -19,40 +19,11 @@ $(document).ready(function () {
       displayCounterStatus(ticket_details.length);
     },
     function (error) {
-      var responseJson = error.responseJSON;
-      var statusCode = responseJson.statusCode;
-      var errorMessage = JSON.parse(responseJson.message).error;
-
-      buildDivForErrorHandling(errorMessage);
-      console.log(statusCode, errorMessage);
+      renderErrorHandling(error);
     }
   );
 
-  function buildDivForErrorHandling(errorMessage) {
-    $(".error-handling").append(
-      `
-      <p>Error: ${errorMessage}</p>
-      `
-    );
-  }
-
-  function displayCounterStatus(count) {
-    if (count > perPage) {
-      $(".counter").append(
-        `
-        <p>${count} total tickets, ${perPage} displayed on this page</p>
-        `
-      );
-    } else {
-      $(".counter").append(
-        `
-        <p>${count} total tickets, ${count} displayed on this page</p>
-        `
-      );
-    }
-  }
-
-  function buildDiv(ticket) {
+  function renderTicketDetails(ticket) {
     $(".ticket-list-wrapper").append(
       `
       <div class="ticket-list-item">
@@ -102,5 +73,32 @@ $(document).ready(function () {
         items.hide().slice(showFrom, showTo).show();
       },
     });
+  }
+
+  function renderErrorHandling(errorMessage) {
+    var responseJson = error.responseJSON;
+    var statusCode = responseJson.statusCode;
+    var errorMessage = JSON.parse(responseJson.message).error;
+    $(".error-handling").append(
+      `
+      <p>Error: ${errorMessage}</p>
+      `
+    );
+  }
+
+  function displayCounterStatus(count) {
+    if (count > perPage) {
+      $(".counter").append(
+        `
+        <p>${count} total tickets, ${perPage} displayed on this page</p>
+        `
+      );
+    } else {
+      $(".counter").append(
+        `
+        <p>${count} total tickets, ${count} displayed on this page</p>
+        `
+      );
+    }
   }
 });
