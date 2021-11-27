@@ -10,6 +10,7 @@ $(document).ready(function () {
   }).then(
     function (data) {
       ticket_details = data.tickets;
+      console.log(ticket_details);
       for (ticket of ticket_details) {
         renderTicketDetails(ticket);
       }

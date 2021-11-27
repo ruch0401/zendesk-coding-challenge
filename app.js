@@ -19,7 +19,10 @@ app.get("/tickets", async (req, res) => {
     headers: {
       "Content-Type": "application/json",
       Authorization:
-        "Basic " + btoa(`${process.env.USERNAME}:${process.env.PASSWORD}`),
+        "Basic " +
+        Buffer.from(`${process.env.USERNAME}:${process.env.PASSWORD}`).toString(
+          "base64"
+        ),
     },
   };
 
@@ -37,7 +40,4 @@ app.get("/tickets", async (req, res) => {
   );
 });
 
-// How to we start listening to the server
-app.listen(3000, () => {
-  console.log("Server is now up and running and listening on PORT 3000");
-});
+module.exports = app;
