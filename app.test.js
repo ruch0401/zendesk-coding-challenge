@@ -1,7 +1,7 @@
 const supertest = require("supertest");
 const app = require("./app");
 
-test("GET /tickets", async () => {
+test("Tests whether /tickets returns the response where key=tags is an array of length 3", async () => {
   await supertest(app)
     .get("/tickets")
     .expect(200)
