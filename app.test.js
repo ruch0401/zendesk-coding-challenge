@@ -23,14 +23,10 @@ test("GET /tickets", async () => {
       expect(tickets.length).toEqual(100);
 
       // Check data
-      expect(tickets[0].id).toBe(ticket.id);
-      expect(tickets[0].created_at).toBe(ticket.created_at);
-      expect(tickets[0].updated_at).toBe(ticket.updated_at);
-      expect(tickets[0].description).toBe(ticket.description);
-      expect(tickets[0].priority).toBe(ticket.priority);
-      expect(tickets[0].status).toBe(ticket.status);
-
-      expect(Array.isArray(tickets[0].tags)).toBeTruthy();
-      expect(tickets[0].tags.length).toBe(3);
+      var i;
+      for (i = 0; i < tickets.length; i++) {
+        expect(Array.isArray(tickets[0].tags)).toBeTruthy();
+        expect(tickets[0].tags.length).toBe(3);
+      }
     });
 });
