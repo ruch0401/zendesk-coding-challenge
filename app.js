@@ -22,33 +22,18 @@ app.get("/tickets", async (req, res) => {
     },
   };
 
-  request(options)
-    .then(function (response) {
+  request(options).then(
+    function (response) {
       res.status(200).json(JSON.parse(response));
-    })
-    .catch(function (err) {
-      console.log("Something went wrong");
-    });
-});
-
-app.get("/ticket/count", async (req, res) => {
-  const options = {
-    method: "GET",
-    uri: `https://zccruchitusc.zendesk.com/api/v2/tickets/count`,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization:
-        "Basic " + btoa(`${process.env.USERNAME}:${process.env.PASSWORD}`),
     },
-  };
-
-  request(options)
-    .then(function (response) {
-      res.status(200).json(JSON.parse(response));
-    })
-    .catch(function (err) {
-      console.log("Something went wrong");
-    });
+    function (err) {
+      console.log(err.statusCode, err.error);
+      res.status(err.statusCode).json({
+        statusCode: err.statusCode,
+        message: err.error,
+      });
+    }
+  );
 });
 
 // How to we start listening to the server

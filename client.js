@@ -1,29 +1,46 @@
 $(document).ready(function () {
   console.log("Ready!");
 
-  var ticket_count;
+  var perPage = 25;
 
   $.ajax({
     url: "http://localhost:3000/tickets",
     method: "GET",
     headers: { "Content-Type": "application/json" },
-  }).done(function (data) {
-    ticket_details = data.tickets;
-    console.log(ticket_details.length);
-    for (ticket of ticket_details) {
-      buildDiv(ticket);
+  }).then(
+    function (data) {
+      ticket_details = data.tickets;
+      for (ticket of ticket_details) {
+        buildDiv(ticket);
+      }
+      if (ticket_details.length > perPage) {
+        paginate();
+      }
+      displayCounterStatus(ticket_details.length);
+    },
+    function (error) {
+      var responseJson = error.responseJSON;
+      var statusCode = responseJson.statusCode;
+      var errorMessage = JSON.parse(responseJson.message).error;
+
+      buildDivForErrorHandling(errorMessage);
+      console.log(statusCode, errorMessage);
     }
-    if (ticket_details.length > 25) {
-      paginate();
-    }
-    displayCounterStatus(ticket_details.length);
-  });
+  );
+
+  function buildDivForErrorHandling(errorMessage) {
+    $(".error-handling").append(
+      `
+      <p>Error: ${errorMessage}</p>
+      `
+    );
+  }
 
   function displayCounterStatus(count) {
-    if (count > 25) {
+    if (count > perPage) {
       $(".counter").append(
         `
-        <p>${count} total tickets, 25 displayed on this page</p>
+        <p>${count} total tickets, ${perPage} displayed on this page</p>
         `
       );
     } else {
@@ -39,7 +56,7 @@ $(document).ready(function () {
     $(".ticket-list-wrapper").append(
       `
       <div class="ticket-list-item">
-      <button class="accordion" id="${ticket.id}">${ticket.subject}</button>
+      <button class="accordion" id="${ticket.id}">${ticket.id}. ${ticket.subject}</button>
       <div class="panel">
         <p>${ticket.description}</p>
         <p>Created at: ${ticket.created_at}</p>
@@ -71,7 +88,6 @@ $(document).ready(function () {
   function paginate() {
     var items = $(".ticket-list-wrapper .ticket-list-item");
     var numItems = items.length;
-    var perPage = 25;
 
     items.slice(perPage).hide();
 

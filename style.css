@@ -75,3 +75,9 @@ button {
 .counter {
   float: right;
 }
+
+.error-handling {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
