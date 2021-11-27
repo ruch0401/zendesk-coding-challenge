@@ -61,3 +61,17 @@ h2.intro {
 button {
   align-items: center;
 }
+
+.ticket-list-item {
+  margin-bottom: 5px;
+}
+
+#pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.counter {
+  float: right;
+}

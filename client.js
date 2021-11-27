@@ -9,40 +9,31 @@ $(document).ready(function () {
     headers: { "Content-Type": "application/json" },
   }).done(function (data) {
     ticket_details = data.tickets;
+    console.log(ticket_details.length);
     for (ticket of ticket_details) {
       buildDiv(ticket);
     }
+    if (ticket_details.length > 25) {
+      paginate();
+    }
+    displayCounterStatus(ticket_details.length);
   });
 
-  $(".count-tickets").on("click", function (e) {
-    $.ajax({
-      url: "http://localhost:3000/ticket/count",
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    }).done(function (data) {
-      ticket_count = data.count.value;
-      console.log("Number of tickets returned ", ticket_count);
-      if (ticket_count > 25) {
-        paginate();
-      }
-    });
-  });
-
-  // $(".fetch-tickets").on("click", function (e) {
-  //   e.preventDefault();
-  //   localStorage.clear();
-  //   $.ajax({
-  //     url: "http://localhost:3000/tickets",
-  //     method: "GET",
-  //     headers: { "Content-Type": "application/json" },
-  //   }).done(function (data) {
-  //     ticket_details = data.tickets;
-  //     for (ticket of ticket_details) {
-  //       console.log(ticket);
-  //       buildDiv(ticket);
-  //     }
-  //   });
-  // });
+  function displayCounterStatus(count) {
+    if (count > 25) {
+      $(".counter").append(
+        `
+        <p>${count} total tickets, 25 displayed on this page</p>
+        `
+      );
+    } else {
+      $(".counter").append(
+        `
+        <p>${count} total tickets, ${count} displayed on this page</p>
+        `
+      );
+    }
+  }
 
   function buildDiv(ticket) {
     $(".ticket-list-wrapper").append(
@@ -79,7 +70,6 @@ $(document).ready(function () {
 
   function paginate() {
     var items = $(".ticket-list-wrapper .ticket-list-item");
-    console.log("Items ", items);
     var numItems = items.length;
     var perPage = 25;
 
