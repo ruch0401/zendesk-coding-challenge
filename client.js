@@ -3,6 +3,7 @@ $(document).ready(function () {
 
   var perPage = 25;
 
+  // client side API call to node server => calls the zendesk /tickets API to fetch a list of tickets
   $.ajax({
     url: "http://localhost:3000/tickets",
     method: "GET",
@@ -23,6 +24,7 @@ $(document).ready(function () {
     }
   );
 
+  // function to process and render tickets list
   function renderTicketDetails(ticket) {
     $(".ticket-list-wrapper").append(
       `
@@ -31,13 +33,7 @@ $(document).ready(function () {
         ticket.subject
       }</button>
       <div class="panel">
-        <p>${ticket.description}</p>
-        <p><b>Created at: </b>${new Date(ticket.created_at)}</p>
-        <p><b>Updated at: </b>${new Date(ticket.updated_at)}</p>
-        <p><b>Tags: </b>${ticket.tags}</p>
-        <p><b>Status: </b>${ticket.status}</p>
-        <p><b>Priorty: </b>${ticket.priority}</p>
-        <p><b>Type: </b>${ticket.type}</p>
+      ${renderTableForTicketData(ticket)}
       </div>
     </div>
       `
@@ -45,6 +41,7 @@ $(document).ready(function () {
     attachAccordion(ticket.id);
   }
 
+  // Helper method to attach accordion to the HTML div
   function attachAccordion(id) {
     var acc = document.getElementById(`${id}`);
     acc.addEventListener("click", function () {
@@ -53,11 +50,12 @@ $(document).ready(function () {
       if (panel.style.maxHeight) {
         panel.style.maxHeight = null;
       } else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
+        panel.style.maxHeight = panel.scrollHeight + 5 + "px";
       }
     });
   }
 
+  // function to handle pagination if the number of tickets are greater than 25
   function paginate() {
     var items = $(".ticket-list-wrapper .ticket-list-item");
     var numItems = items.length;
@@ -77,6 +75,7 @@ $(document).ready(function () {
     });
   }
 
+  // function to handle and render errors
   function renderErrorHandling(error) {
     var responseJson = error.responseJSON;
     var statusCode = responseJson.statusCode;
@@ -88,6 +87,7 @@ $(document).ready(function () {
     );
   }
 
+  // function for displaying the total and this page ticket counter
   function displayCounterStatus(count) {
     if (count > perPage) {
       $(".counter").append(
@@ -102,5 +102,42 @@ $(document).ready(function () {
         `
       );
     }
+  }
+
+  // function for rendering ticket data in a table
+  function renderTableForTicketData(ticket) {
+    return `
+      <table>
+  <tr>
+    <th>Description</th>
+    <th>Created at</th>
+    <th>Updated at</th>
+    <th>Tags</th>
+    <th>Status</th>
+    <th>Priority</th>
+    <th>Type</th>
+  </tr>
+  <tr>
+    <td>${ticket.description}</td>
+    <td>${new Date(ticket.created_at)}</td>
+    <td>${new Date(ticket.updated_at)}</td>
+    <td>${ticket.tags}</td>
+    <td>${ticket.status}</td>
+    <td>${ticket.priority}</td>
+    <td>${ticket.type}</td>
+  </tr>
+</table>
+`;
+  }
+
+  // function for rendering ticket data in a paragraph. Currently this is not used anywhere but is saved in case of future use
+  function renderParagraphForTicketData(ticket) {
+    return `<p>${ticket.description}</p>
+    <p><b>Created at: </b>${new Date(ticket.created_at)}</p>
+    <p><b>Updated at: </b>${new Date(ticket.updated_at)}</p>
+    <p><b>Tags: </b>${ticket.tags}</p>
+    <p><b>Status: </b>${ticket.status}</p>
+    <p><b>Priorty: </b>${ticket.priority}</p>
+    <p><b>Type: </b>${ticket.type}</p>`;
   }
 });
