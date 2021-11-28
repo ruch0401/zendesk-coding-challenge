@@ -4,7 +4,7 @@
 - Run the following command - 
 
 ```
-https://github.com/ruch0401/zendesk-coding-challenge.git
+git clone https://github.com/ruch0401/zendesk-coding-challenge.git
 ```
 
 Prerequisites

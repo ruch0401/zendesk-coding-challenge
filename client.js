@@ -30,12 +30,12 @@ $(document).ready(function () {
       <button class="accordion" id="${ticket.id}">${ticket.id}. ${ticket.subject}</button>
       <div class="panel">
         <p>${ticket.description}</p>
-        <p>Created at: ${ticket.created_at}</p>
-        <p>Updated at: ${ticket.updated_at}</p>
-        <p>Tags: ${ticket.tags}</p>
-        <p>Status: ${ticket.status}</p>
-        <p>Priorty: ${ticket.priority}</p>
-        <p>Type: ${ticket.type}</p>
+        <p><b>Created at: </b>${ticket.created_at}</p>
+        <p><b>Updated at: </b>${ticket.updated_at}</p>
+        <p><b>Tags: </b>${ticket.tags}</p>
+        <p><b>Status: </b>${ticket.status}</p>
+        <p><b>Priorty: </b>${ticket.priority}</p>
+        <p><b>Type: </b>${ticket.type}</p>
       </div>
     </div>
       `
