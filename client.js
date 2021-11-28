@@ -27,11 +27,13 @@ $(document).ready(function () {
     $(".ticket-list-wrapper").append(
       `
       <div class="ticket-list-item">
-      <button class="accordion" id="${ticket.id}">${ticket.id}. ${ticket.subject}</button>
+      <button class="accordion" id="${ticket.id}">${ticket.id}. ${
+        ticket.subject
+      }</button>
       <div class="panel">
         <p>${ticket.description}</p>
-        <p><b>Created at: </b>${ticket.created_at}</p>
-        <p><b>Updated at: </b>${ticket.updated_at}</p>
+        <p><b>Created at: </b>${new Date(ticket.created_at)}</p>
+        <p><b>Updated at: </b>${new Date(ticket.updated_at)}</p>
         <p><b>Tags: </b>${ticket.tags}</p>
         <p><b>Status: </b>${ticket.status}</p>
         <p><b>Priorty: </b>${ticket.priority}</p>
