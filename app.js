@@ -40,4 +40,5 @@ app.get("/tickets", async (req, res) => {
   );
 });
 
+// EXPORTING app TO COMPLY IN CASE OF MULTIPLE TESTS SO THAT EACH TEST CAN START ITS OWN SERVER AT SEPARATE PORTS
 module.exports = app;
