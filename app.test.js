@@ -26,6 +26,7 @@ test("Tests whether /tickets returns the response where key=tags is an array of 
     });
 });
 
+// This test takes into consideration that # of tickets returned will be greater than 75
 test("Tests whether the response from /tickets is paginated if count of tickets is greater than 25", async () => {
   await supertest(app)
     .get("/tickets")
