@@ -75,7 +75,7 @@ $(document).ready(function () {
     });
   }
 
-  function renderErrorHandling(errorMessage) {
+  function renderErrorHandling(error) {
     var responseJson = error.responseJSON;
     var statusCode = responseJson.statusCode;
     var errorMessage = JSON.parse(responseJson.message).error;
