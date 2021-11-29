@@ -48,6 +48,10 @@ UNAME=<email-id-here>
 PWORD=<password-here>
 ```
 
+```
+Note: The .env file allows abstraction of the username, password and other sensitive information so that we are not needed to upload these details to version control. These 'environment-variables' can be accessed using process.env.KEY_NAME, where KEY_NAME is the environment-variable name that needs to be used.
+```
+
 - Now, you have to start the server. In the terminal, run the following command
 
 ```
