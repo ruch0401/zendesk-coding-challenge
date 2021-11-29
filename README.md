@@ -40,8 +40,8 @@ npm install
 - Once done, you need to create a new file named `.env`. Enter the following content in the file, save it and close it.
 
 ```
-USERNAME=<email-id-here>
-PASSWORD=<password-here>
+UNAME=<email-id-here>
+PWORD=<password-here>
 ```
 
 - Now, you have to start the server. In the terminal, run the following command
