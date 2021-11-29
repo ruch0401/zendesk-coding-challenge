@@ -20,7 +20,7 @@ app.get("/tickets", async (req, res) => {
       "Content-Type": "application/json",
       Authorization:
         "Basic " +
-        Buffer.from(`${process.env.USERNAME}:${process.env.PASSWORD}`).toString(
+        Buffer.from(`${process.env.UNAME}:${process.env.PWORD}`).toString(
           "base64"
         ),
     },
