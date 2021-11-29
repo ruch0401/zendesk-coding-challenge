@@ -80,7 +80,7 @@ This will start the local server on port 3000
 
 | ![count-display](resources/count-display.png "count-display") |
 | :-----------------------------------------------------------: |
-|                   <b>Ticket list stats</b>                    |
+|                   <b>Ticket Counter Stats</b>                    |
 
 - You can expand any accordion to view some critical information about a ticket.
 
