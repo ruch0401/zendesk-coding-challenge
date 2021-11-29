@@ -31,13 +31,17 @@ The output should be something like this -
 
 - Navigate to the `zendesk-coding-challenge` directory and open a terminal window here. The following steps have to be performed in this terminal window.
 
+```
+cd zendesk-coding-challenge/
+```
+
 - Run the following commmand. This will install all the dependencies present in the `package.json` file.
 
 ```
 npm install
 ```
 
-- Once done, you need to create a new file named `.env`. Enter the following content in the file, save it and close it.
+- Once done, you need to create a new file named `.env` in the ```zendesk-coding-challenge``` directory which we had created previously. Enter the following content in the file, save it and close it.
 
 ```
 UNAME=<email-id-here>
