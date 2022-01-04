@@ -4,26 +4,46 @@ $(document).ready(function () {
   var perPage = 25;
 
   // client side API call to node server => calls the zendesk /tickets API to fetch a list of tickets
-  $.ajax({
-    url: "http://localhost:3000/tickets",
-    method: "GET",
-    headers: { "Content-Type": "text/html" },
-  }).then(
-    function (data) {
-      console.log(data);
-      ticket_details = data.tickets;
-      for (ticket of ticket_details) {
-        renderTicketDetails(ticket);
+  $(".get-tickets").on("click", () => {
+    $.ajax({
+      url: "http://localhost:3000/tickets",
+      method: "GET",
+      headers: { "Content-Type": "text/html" },
+    }).then(
+      function (data) {
+        console.log(data);
+        ticket_details = data.tickets;
+        for (ticket of ticket_details) {
+          renderTicketDetails(ticket);
+        }
+        if (ticket_details.length > perPage) {
+          paginate();
+        }
+        displayCounterStatus(ticket_details.length);
+      },
+      function (error) {
+        renderErrorHandling(error);
       }
-      if (ticket_details.length > perPage) {
-        paginate();
-      }
-      displayCounterStatus(ticket_details.length);
-    },
-    function (error) {
-      renderErrorHandling(error);
-    }
-  );
+    );
+  });
+
+  // adding eventListener to a button to render a form
+  $(".enter-ticket-details").on("click", () => {
+    renderForm();
+  });
+
+  // render form to enter ticket details
+  function renderForm() {
+    $(".form-placeholder").append(
+      `<form action="http://localhost:3000/ticket" method="post">
+      <label for="subject-id">Subject</label>
+      <input type="text" name="subject" id="subject-id">
+      <label for="comment-id">Comment</label>
+      <input type="text" name="comment" id="comment-id">
+      <button type="submit">Create Ticket</button>
+    </form>`
+    );
+  }
 
   // function to process and render tickets list
   function renderTicketDetails(ticket) {
