@@ -13,6 +13,7 @@ $(document).ready(function () {
       function (data) {
         console.log(data);
         ticket_details = data.tickets;
+        $(".ticket-list-wrapper").empty();
         for (ticket of ticket_details) {
           renderTicketDetails(ticket);
         }
@@ -110,6 +111,7 @@ $(document).ready(function () {
 
   // function for displaying the total and this page ticket counter
   function displayCounterStatus(count) {
+    $(".counter").empty();
     if (count > perPage) {
       $(".counter").append(
         `
