@@ -7,9 +7,10 @@ $(document).ready(function () {
   $.ajax({
     url: "http://localhost:3000/tickets",
     method: "GET",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "text/html" },
   }).then(
     function (data) {
+      console.log(data);
       ticket_details = data.tickets;
       for (ticket of ticket_details) {
         renderTicketDetails(ticket);
