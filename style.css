@@ -98,3 +98,7 @@ th {
 tr:nth-child(odd) {
   background-color: #dddddd;
 }
+
+div {
+  padding: 5px;
+}
