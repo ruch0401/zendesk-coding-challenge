@@ -46,6 +46,26 @@ $(document).ready(function () {
     );
   }
 
+  $(".search-button").on("click", () => {
+    const searchValue = $("#search-value").val();
+    $.ajax({
+      url: `http://localhost:3000/search?query=${searchValue}`,
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    }).then(
+      (data) => {
+        const tickets = data.results;
+        $(".ticket-list-wrapper").empty();
+        for (ticket of tickets) {
+          renderTicketDetails(ticket);
+        }
+      },
+      (error) => {
+        renderErrorHandling(error);
+      }
+    );
+  });
+
   // function to process and render tickets list
   function renderTicketDetails(ticket) {
     $(".ticket-list-wrapper").append(

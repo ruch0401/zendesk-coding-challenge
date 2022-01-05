@@ -1,38 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/jquery.simplePagination.min.js"
-      integrity="sha512-J4OD+6Nca5l8HwpKlxiZZ5iF79e9sgRGSf0GxLsL1W55HHdg48AEiKCXqvQCNtA1NOMOVrw15DXnVuPpBm2mPg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/simplePagination.css"
-      integrity="sha512-emkhkASXU1wKqnSDVZiYpSKjYEPP8RRG2lgIxDFVI4f/twjijBnDItdaRh7j+VRKFs4YzrAcV17JeFqX+3NVig=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <title>Zendesk Coding Challenge</title>
-  </head>
-  <body>
-    <h1 class="intro">Mobile Ticket Viewer</h2>
-      <div class="sample-post">
-        <button class="get-tickets">Get All Tickets</button>
-        <button class="enter-ticket-details">Enter Details to Create Ticket</button>
-      </div>
-      <div class="form-placeholder" >
-      </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/jquery.simplePagination.min.js"
+    integrity="sha512-J4OD+6Nca5l8HwpKlxiZZ5iF79e9sgRGSf0GxLsL1W55HHdg48AEiKCXqvQCNtA1NOMOVrw15DXnVuPpBm2mPg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/simplePagination.css"
+    integrity="sha512-emkhkASXU1wKqnSDVZiYpSKjYEPP8RRG2lgIxDFVI4f/twjijBnDItdaRh7j+VRKFs4YzrAcV17JeFqX+3NVig=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Zendesk Coding Challenge</title>
+</head>
+
+<body>
+  <h1 class="intro">Mobile Ticket Viewer</h2>
+    <div class="sample-post">
+      <button class="get-tickets">Get All Tickets</button>
+      <button class="enter-ticket-details">Enter Details to Create Ticket</button>
+    </div>
+    <div class="form-placeholder"></div>
+    <div class="search-container">
+      <input type="text" name="query" id="search-value">
+      <button class="search-button">Search</button>
+    </div>
     <div class="error-handling"></div>
     <div class="counter"></div>
     <div class="ticket-list-wrapper"></div>
     <div id="pagination-container"></div>
     <script src="client.js"></script>
-  </body>
+</body>
+
 </html>

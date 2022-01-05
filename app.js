@@ -81,5 +81,28 @@ app.post("/ticket", urlencodedParser, async (req, res) => {
   );
 });
 
+// ROUTE - to implement basic search functionality
+app.get("/search", urlencodedParser, async (req, res) => {
+  const queryString = req.query.query;
+  console.log(queryString);
+  const options = {
+    url: `https://usc6156.zendesk.com/api/v2/search.json?query=${queryString}`,
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Basic ${base64token}`,
+    },
+  };
+
+  request(options).then(
+    (response) => {
+      res.status(200).json(JSON.parse(response));
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+});
+
 // EXPORTING app TO COMPLY IN CASE OF MULTIPLE TESTS SO THAT EACH TEST CAN START ITS OWN SERVER AT SEPARATE PORTS
 module.exports = app;
