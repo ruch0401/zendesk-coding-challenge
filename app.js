@@ -15,7 +15,7 @@ app.use(
 app.get("/tickets", (req, res) => {
   const options = {
     method: "GET",
-    uri: "https://zccruchitusc.zendesk.com/api/v2/tickets",
+    uri: "https://usc6156.zendesk.com/api/v2/tickets",
     headers: {
       "Content-Type": "application/json",
       Authorization:

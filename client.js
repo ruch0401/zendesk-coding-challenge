@@ -16,8 +16,9 @@ $(document).ready(function () {
       }
       if (ticket_details.length > perPage) {
         paginate();
+      } else {
+        displayCounterStatus(ticket_details.length, ticket_details.length);
       }
-      displayCounterStatus(ticket_details.length);
     },
     function (error) {
       renderErrorHandling(error);
@@ -71,6 +72,11 @@ $(document).ready(function () {
         var showFrom = perPage * (pageNumber - 1);
         var showTo = showFrom + perPage;
         items.hide().slice(showFrom, showTo).show();
+
+        showTo = showTo > numItems ? numItems : showTo;
+        let countOnPage = showTo - showFrom;
+        console.log("this is the count on page", showFrom, showTo, countOnPage);
+        displayCounterStatus(numItems, countOnPage);
       },
     });
   }
@@ -88,20 +94,11 @@ $(document).ready(function () {
   }
 
   // function for displaying the total and this page ticket counter
-  function displayCounterStatus(count) {
-    if (count > perPage) {
-      $(".counter").append(
-        `
-        <p>${count} total tickets, ${perPage} displayed on this page</p>
-        `
-      );
-    } else {
-      $(".counter").append(
-        `
-        <p>${count} total tickets, ${count} displayed on this page</p>
-        `
-      );
-    }
+  function displayCounterStatus(total, count) {
+    $(".counter").empty();
+    $(".counter").append(
+      `<p>${total} total tickets, ${count} displayed on this page</p>`
+    );
   }
 
   // function for rendering ticket data in a table
