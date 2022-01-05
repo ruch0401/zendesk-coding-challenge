@@ -12,7 +12,7 @@ app.use(
 );
 
 // ROUTE
-app.get("/tickets", async (req, res) => {
+app.get("/tickets", (req, res) => {
   const options = {
     method: "GET",
     uri: "https://zccruchitusc.zendesk.com/api/v2/tickets",
