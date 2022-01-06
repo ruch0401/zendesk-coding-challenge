@@ -1,7 +1,7 @@
 $(document).ready(function () {
   console.log("Ready!");
 
-  var perPage = 25;
+  var perPage = 4;
 
   // client side API call to node server => calls the zendesk /tickets API to fetch a list of tickets
   $.ajax({
@@ -16,6 +16,7 @@ $(document).ready(function () {
       }
       if (ticket_details.length > perPage) {
         paginate();
+        displayCounterStatus(ticket_details.length, perPage);
       } else {
         displayCounterStatus(ticket_details.length, ticket_details.length);
       }
