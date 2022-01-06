@@ -1,7 +1,7 @@
 $(document).ready(function () {
   console.log("Ready!");
 
-  var perPage = 25;
+  var perPage = 4;
 
   // client side API call to node server => calls the zendesk /tickets API to fetch a list of tickets
   $(".get-tickets").on("click", () => {
@@ -18,15 +18,17 @@ $(document).ready(function () {
           renderTicketDetails(ticket);
         }
         if (ticket_details.length > perPage) {
-          paginate();
-        }
-        displayCounterStatus(ticket_details.length);
-      },
-      function (error) {
-        renderErrorHandling(error);
+        paginate();
+        displayCounterStatus(ticket_details.length, perPage);
+      } else {
+        displayCounterStatus(ticket_details.length, ticket_details.length);
       }
-    );
-  });
+    },
+    function (error) {
+      renderErrorHandling(error);
+    }
+  );
+ });
 
   // adding eventListener to a button to render a form
   $(".enter-ticket-details").on("click", () => {
@@ -113,6 +115,11 @@ $(document).ready(function () {
         var showFrom = perPage * (pageNumber - 1);
         var showTo = showFrom + perPage;
         items.hide().slice(showFrom, showTo).show();
+
+        showTo = showTo > numItems ? numItems : showTo;
+        let countOnPage = showTo - showFrom;
+        console.log("this is the count on page", showFrom, showTo, countOnPage);
+        displayCounterStatus(numItems, countOnPage);
       },
     });
   }
@@ -130,21 +137,11 @@ $(document).ready(function () {
   }
 
   // function for displaying the total and this page ticket counter
-  function displayCounterStatus(count) {
+  function displayCounterStatus(total, count) {
     $(".counter").empty();
-    if (count > perPage) {
-      $(".counter").append(
-        `
-        <p>${count} total tickets, ${perPage} displayed on this page</p>
-        `
-      );
-    } else {
-      $(".counter").append(
-        `
-        <p>${count} total tickets, ${count} displayed on this page</p>
-        `
-      );
-    }
+    $(".counter").append(
+      `<p>${total} total tickets, ${count} displayed on this page</p>`
+    );
   }
 
   // function for rendering ticket data in a table
