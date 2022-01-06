@@ -21,7 +21,6 @@ const base64token = Buffer.from(
 
 // ROUTE - To get a list of tickets
 app.get("/tickets", async (req, res) => {
-
   const options = {
     method: "GET",
     uri: "https://usc6156.zendesk.com/api/v2/tickets",
@@ -85,7 +84,6 @@ app.post("/ticket", urlencodedParser, async (req, res) => {
 // ROUTE - to implement basic search functionality
 app.get("/search", urlencodedParser, async (req, res) => {
   const queryString = req.query.query;
-  console.log(queryString);
   const options = {
     url: `https://usc6156.zendesk.com/api/v2/search.json?query=${queryString}`,
     method: "GET",

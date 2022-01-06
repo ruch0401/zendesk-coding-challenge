@@ -18,17 +18,49 @@ $(document).ready(function () {
           renderTicketDetails(ticket);
         }
         if (ticket_details.length > perPage) {
-        paginate();
-        displayCounterStatus(ticket_details.length, perPage);
-      } else {
-        displayCounterStatus(ticket_details.length, ticket_details.length);
+          paginate();
+          displayCounterStatus(ticket_details.length, perPage);
+        } else {
+          displayCounterStatus(ticket_details.length, ticket_details.length);
+        }
+      },
+      function (error) {
+        renderErrorHandling(error);
       }
-    },
-    function (error) {
-      renderErrorHandling(error);
-    }
-  );
- });
+    );
+  });
+
+  $(".search-button").on("click", () => {
+    const searchValue = $("#search-value").val();
+    $.ajax({
+      url: `http://localhost:3000/search?query=${searchValue}`,
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    }).then(
+      (data) => {
+        const tickets = data.results;
+        if (tickets.length === 0) {
+          console.log("No tickets match the search criteria");
+          $(".counter").empty();
+          $(".pagination-container").empty();
+        }
+        $(".ticket-list-wrapper").empty();
+        console.log("these are the tickets", tickets);
+        for (ticket of tickets) {
+          renderTicketDetails(ticket);
+        }
+        if (tickets.length > perPage) {
+          paginate();
+          displayCounterStatus(tickets.length, perPage);
+        } else {
+          displayCounterStatus(tickets.length, tickets.length);
+        }
+      },
+      (error) => {
+        renderErrorHandling(error);
+      }
+    );
+  });
 
   // adding eventListener to a button to render a form
   $(".enter-ticket-details").on("click", () => {
@@ -47,26 +79,6 @@ $(document).ready(function () {
     </form>`
     );
   }
-
-  $(".search-button").on("click", () => {
-    const searchValue = $("#search-value").val();
-    $.ajax({
-      url: `http://localhost:3000/search?query=${searchValue}`,
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    }).then(
-      (data) => {
-        const tickets = data.results;
-        $(".ticket-list-wrapper").empty();
-        for (ticket of tickets) {
-          renderTicketDetails(ticket);
-        }
-      },
-      (error) => {
-        renderErrorHandling(error);
-      }
-    );
-  });
 
   // function to process and render tickets list
   function renderTicketDetails(ticket) {
