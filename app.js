@@ -69,7 +69,8 @@ app.post("/ticket", urlencodedParser, async (req, res) => {
 
   request(options).then(
     (response) => {
-      res.status(200).json(response);
+      const message = `Ticket with subject "${response.ticket.subject}" and comment "${response.ticket.description}" has been successfully created. Please navigate back to the browser and click on 'Get All Tickets' to view your created ticket`;
+      res.send(message);
     },
     (err) => {
       console.log(err),
