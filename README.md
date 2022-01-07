@@ -1,5 +1,11 @@
 # Zendesk Coding Challenge
 
+## Working Video
+
+![Zendesk Coding Challenge Working GIF](resources/zendesk-coding-challenge.gif)
+
+## Instructions
+
 - Create a directory on your local machine named - zendesk-coding-challenge
 - Run the following command -
 
@@ -41,7 +47,7 @@ cd zendesk-coding-challenge/
 npm install
 ```
 
-- Once done, you need to create a new file named `.env` in the ```zendesk-coding-challenge``` directory which we had created previously. Enter the following content in the file, save it and close it.
+- Once done, you need to create a new file named `.env` in the `zendesk-coding-challenge` directory which we had created previously. Enter the following content in the file, save it and close it.
 
 ```
 UNAME=<email-id-here>
@@ -62,9 +68,11 @@ This will start the local server on port 3000
 
 - Now, open the `index.html` file on your browser, preferrably, Google Chrome.
 
-# Features
+## Features
 
 - You should be able to see a list view of the tickets available in your Zendesk's account
+
+Update: Please note that now, the tickets can be fetched after a button click.
 
 | ![all-ticket-list](resources/all-ticket-list.png "List of all tickets as an accordion") |
 | :-------------------------------------------------------------------------------------: |
@@ -80,7 +88,7 @@ This will start the local server on port 3000
 
 | ![count-display](resources/count-display.png "count-display") |
 | :-----------------------------------------------------------: |
-|                   <b>Ticket Counter Stats</b>                    |
+|                  <b>Ticket Counter Stats</b>                  |
 
 - You can expand any accordion to view some critical information about a ticket.
 
@@ -94,7 +102,9 @@ This will start the local server on port 3000
 | :--------------------------------------------------------------: |
 |                      <b>Error Handling</b>                       |
 
-# Tests
+- To enable a holistic user experience, I have also added a 'search' functionality and a 'create-ticket' functionality. Please find the working GIF [here](#working-video)
+
+## Tests
 
 Framework Used -
 
